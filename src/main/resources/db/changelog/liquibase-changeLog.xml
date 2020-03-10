@@ -14,4 +14,14 @@
             <column name="modifiedAt" type="datetime" defaultValueDate="NOW()"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="alterZoneAndCityToAddAuditedByColumns" author="ambarish.r">
+        <addColumn tableName="zone">
+            <column name="createdBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+            <column name="modifiedBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+        </addColumn>
+        <addColumn tableName="city">
+            <column name="createdBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+            <column name="modifiedBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

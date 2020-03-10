@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <RollingRandomAccessFile name="File"
+                                 fileName="/var/log/api/api.log"
+                                 append="false"
+                                 filePattern="/var/log/api/api-%i.log.zip">
+
+            <PatternLayout
+                    pattern="%date{yyyy-MM-dd HH:mm:ss.SSS}{GMT+0} %MDC{correlation_id} %level [%threadName] %c{-10} - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1024 MB"/>
+            </Policies>
+
+            <DefaultRolloverStrategy compressionLevel="9"
+                                     max="16"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <!--        <Logger name="com.turvo.rest" level="debug" />-->
+        <Logger name="org.hibernate.SQL" level="info"/>
+        <!--<Logger name="io.swagger" level="info" additivity="false"/> -->
+        <Logger name="com.rha"
+                level="info"/>
+        <!--        <Logger name="deadLetter" level="debug" additivity="false">-->
+        <!--            <AppenderRef ref="deadLetter" />-->
+        <!--        </Logger>-->
+        <!--        <Logger name="audit-subTrace" level="info" additivity="false">-->
+        <!--            <AppenderRef ref="audit-subTrace" />-->
+        <!--        </Logger>-->
+        <!--        <Logger name="audit-requestStore" level="info"-->
+        <!--                additivity="false">-->
+        <!--            <AppenderRef ref="audit-requestStore" />-->
+        <!--        </Logger>-->
+        <Logger name="org.apache.http" level="warn"/>
+        <Root level="info">
+
+            <!-- PLEASE DO NOT CHANGE THIS TO STDOUT to debug local issues. Instead
+                start the service with -Dlog4j.configurationFile=<your-log-file> and write
+                the STDOUT override there -->
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -9,11 +9,11 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "zone")
+@Table(name = "status")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Data
-public class Zone extends AuditableEntity implements Serializable {
+public class Status extends AuditableEntity implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +22,4 @@ public class Zone extends AuditableEntity implements Serializable {
     @NotBlank
     @Column(name = "name")
     private String name;
-
-    @Column(name = "active")
-    private Boolean active;
-
-    public void copyAttributes(Zone zone) {
-        this.setName(zone.getName());
-    }
 }

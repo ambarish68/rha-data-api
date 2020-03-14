@@ -29,4 +29,11 @@
             <column name="active" type="bit" defaultValueBoolean="true"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="alterStatusToAddActiveColumn" author="ambarish.r">
+        <addColumn tableName="status">
+            <column name="createdBy" type="VARCHAR(45)" defaultValue="ambarish.v.rao@gmail.com"></column>
+            <column name="modifiedBy" type="VARCHAR(45)" defaultValue="ambarish.v.rao@gmail.com"></column>
+            <column name="modifiedAt" type="datetime" defaultValueDate="NOW()"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

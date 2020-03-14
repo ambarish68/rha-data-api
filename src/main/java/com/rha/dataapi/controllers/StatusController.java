@@ -20,8 +20,8 @@ public class StatusController {
     private StatusService statusService;
 
     @GetMapping
-    public ResponseEntity<List<Status>> getZones() {
-        log.info("getting all zones");
+    public ResponseEntity<List<Status>> getAllStatuses() {
+        log.info("getting all statuses");
         return ResponseEntity.ok(statusService.getAllStatuses());
     }
 }

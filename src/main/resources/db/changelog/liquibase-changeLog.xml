@@ -24,4 +24,9 @@
             <column name="modifiedBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="alterZoneToAddActiveColumn" author="ambarish.r">
+        <addColumn tableName="zone">
+            <column name="active" type="bit" defaultValueBoolean="true"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

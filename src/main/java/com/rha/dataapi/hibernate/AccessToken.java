@@ -8,29 +8,34 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "zone")
+@Table(name = "access_token")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
 @Data
-public class Zone extends AuditableEntity implements Serializable {
-    @Column(name = "id")
+public class AccessToken {
+    @Column( name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank
-    @Column(name = "name")
-    private String name;
+    @Column( name = "token")
+    private String token;
 
-    @Column(name = "active")
-    private Boolean active;
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User user;
 
-    public void copyAttributes(Zone zone) {
-        this.setName(zone.getName());
-    }
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdAt;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date expiresAt;
 }

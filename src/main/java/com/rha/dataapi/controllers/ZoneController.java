@@ -42,7 +42,7 @@ public class ZoneController {
     @PutMapping("/{id}")
     public ResponseEntity<Zone> updateZone(@PathVariable Integer id, @RequestBody Zone zoneToBeUpdated) {
         try {
-            if (zoneToBeUpdated.getId() != id) {
+            if (!id.equals(zoneToBeUpdated.getId())) {
                 zoneToBeUpdated.setId(id);
             }
             log.info("updating zone with parameters: " + objectMapper.writeValueAsString(zoneToBeUpdated));
@@ -56,7 +56,7 @@ public class ZoneController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteZone(@PathVariable Integer id) {
         try {
-            log.info("updating zone with id: " + id);
+            log.info("deleting zone with id: " + id);
             zoneService.deleteZone(id);
             return ResponseEntity.ok("Zone deactivated successfully");
         } catch (Exception e) {

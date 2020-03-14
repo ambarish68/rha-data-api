@@ -2,6 +2,7 @@ package com.rha.dataapi.auth.filters;
 
 import com.rha.dataapi.auth.services.JwtUserDetailsService;
 import com.rha.dataapi.config.JwtTokenUtil;
+import com.rha.dataapi.services.CorrelationIdService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private JwtUserDetailsService jwtUserDetailsService;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-    private String emailId;
+
+    @Autowired
+    private CorrelationIdService correlationIdService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -62,6 +65,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
+        String nonce = request.getHeader("nonce");
+        correlationIdService.setMDC(emailId, nonce);
         chain.doFilter(request, response);
     }
 }

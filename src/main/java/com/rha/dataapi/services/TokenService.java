@@ -47,4 +47,8 @@ public class TokenService {
         tokenRepository.save(accessToken);
         tokenUserCache.put(token, user.get());
     }
+
+    public void clearCache() {
+        tokenUserCache.invalidateAll();
+    }
 }

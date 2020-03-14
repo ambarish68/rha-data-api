@@ -47,4 +47,8 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
         return null;
     }
+
+    public void clearCache(){
+        userCache.invalidateAll();
+    }
 }

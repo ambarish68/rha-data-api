@@ -25,14 +25,14 @@ public class ZoneController {
     @GetMapping
     public ResponseEntity<List<Zone>> getZones() {
         log.info("getting all zones");
-        return ResponseEntity.ok(zoneService.getAllZones());
+        return ResponseEntity.ok(zoneService.getAll());
     }
 
     @PostMapping
     public ResponseEntity<Zone> createZone(@RequestBody Zone zoneToBeCreated) {
         try {
             log.info("creating zone with parameters: " + objectMapper.writeValueAsString(zoneToBeCreated));
-            return ResponseEntity.ok(zoneService.createZone(zoneToBeCreated));
+            return ResponseEntity.ok(zoneService.create(zoneToBeCreated));
         } catch (Exception e) {
             log.error("Error creating zone", e);
         }
@@ -46,7 +46,7 @@ public class ZoneController {
                 zoneToBeUpdated.setId(id);
             }
             log.info("updating zone with parameters: " + objectMapper.writeValueAsString(zoneToBeUpdated));
-            return ResponseEntity.ok(zoneService.updateZone(zoneToBeUpdated));
+            return ResponseEntity.ok(zoneService.update(id, zoneToBeUpdated));
         } catch (Exception e) {
             log.error("Error creating zone", e);
         }
@@ -57,7 +57,7 @@ public class ZoneController {
     public ResponseEntity<String> deleteZone(@PathVariable Integer id) {
         try {
             log.info("deleting zone with id: " + id);
-            zoneService.deleteZone(id);
+            zoneService.delete(id);
             return ResponseEntity.ok("Zone deactivated successfully");
         } catch (Exception e) {
             log.error("Error creating zone", e);

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Data
-public class Status extends AuditableEntity implements Serializable {
+public class Status extends AuditableEntity<Status> implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +22,9 @@ public class Status extends AuditableEntity implements Serializable {
     @NotBlank
     @Column(name = "name")
     private String name;
+
+    @Override
+    public void copyAttributes(Status statusToBeUpdated) {
+        //Do nothing, as there are not exactly any attributes to copy
+    }
 }

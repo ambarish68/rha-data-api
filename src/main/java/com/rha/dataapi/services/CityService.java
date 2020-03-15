@@ -73,7 +73,7 @@ public class CityService implements ICrudService<City, Integer> {
         if (optionalCity.isPresent()) {
             City existingCity = optionalCity.get();
             existingCity.copyAttributes(cityToBeUpdated);
-            cityRepository.save(existingCity);
+            return cityRepository.save(existingCity);
         }
         throw new EntityNotFoundException();
     }
@@ -86,6 +86,7 @@ public class CityService implements ICrudService<City, Integer> {
             City existingCity = optionalCity.get();
             existingCity.setActive(false);
             cityRepository.save(existingCity);
+            return;
         }
         throw new EntityNotFoundException();
     }

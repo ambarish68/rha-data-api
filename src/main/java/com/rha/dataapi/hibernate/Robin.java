@@ -1,19 +1,22 @@
 package com.rha.dataapi.hibernate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "robin")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
-@Data
+@Getter
+@Setter
 public class Robin extends AuditableEntity<Robin> implements Serializable {
 
     @Id
@@ -45,6 +48,10 @@ public class Robin extends AuditableEntity<Robin> implements Serializable {
 
     @Column(name = "active")
     private Boolean active;
+
+    @ManyToMany(mappedBy = "robins")
+    @JsonIgnoreProperties("robins")
+    private List<City> cities;
 
     @Override
     public void copyAttributes(Robin robinToBeCopiedFrom) {

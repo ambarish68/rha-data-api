@@ -12,7 +12,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @Data
-public abstract class AuditableEntity<T> {
+public abstract class AuditableEntity<Entity> {
     @Column(nullable = false, updatable = false, name = "createdAt")
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -46,5 +46,5 @@ public abstract class AuditableEntity<T> {
         this.setModifiedBy(userDetails.getUsername());
     }
 
-    public abstract void copyAttributes(T t);
+    public abstract void copyAttributes(Entity t);
 }

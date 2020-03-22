@@ -43,6 +43,7 @@ public class TokenService {
         Optional<User> user = userRepository.findByEmailId(userDetails.getUsername());
         accessToken.setCreatedAt(dateTime.toDate());
         accessToken.setUser(user.get());
+        accessToken.setToken(token);
         accessToken.setExpiresAt(dateTime.toDateTime().plusSeconds((int) JwtTokenUtil.JWT_TOKEN_VALIDITY).toDate());
         tokenRepository.save(accessToken);
         tokenUserCache.put(token, user.get());

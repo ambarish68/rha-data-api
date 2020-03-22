@@ -14,16 +14,7 @@ import java.util.Objects;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Data
-public class User extends AuditableEntity<User> implements Serializable {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @NotBlank
-    @Column(name = "name")
-    private String name;
-
+public class User extends IdentityEntity<Integer, User> implements Serializable {
     @NotBlank
     @Column(name = "emailId")
     private String emailId;
@@ -31,9 +22,6 @@ public class User extends AuditableEntity<User> implements Serializable {
     @NotBlank
     @Column(name = "password")
     private String password;
-
-    @Column(name = "active")
-    private Boolean active;
 
     @Override
     public void copyAttributes(User userToBeCopiedFrom) {

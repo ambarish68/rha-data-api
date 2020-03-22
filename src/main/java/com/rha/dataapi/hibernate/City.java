@@ -18,22 +18,11 @@ import java.util.Objects;
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Getter
 @Setter
-public class City extends AuditableEntity<City> implements Serializable {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @NotBlank
-    @Column(name = "name")
-    private String name;
+public class City extends IdentityEntity<Integer, City> implements Serializable {
 
     @NotBlank
     @Column(name = "emailId")
     private String emailId;
-
-    @Column(name = "active")
-    private Boolean active;
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "zoneId", referencedColumnName = "id")

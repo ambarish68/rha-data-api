@@ -17,16 +17,8 @@ import java.util.Objects;
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Getter
 @Setter
-public class Robin extends AuditableEntity<Robin> implements Serializable {
+public class Robin extends IdentityEntity<Integer, Robin> implements Serializable {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @NotBlank
-    @Column(name = "name")
-    private String name;
 
     @Column(name = "emailId")
     private String emailId;
@@ -45,9 +37,6 @@ public class Robin extends AuditableEntity<Robin> implements Serializable {
 
     @Column(name = "emergencyContactNumber")
     private String emergencyContactNumber;
-
-    @Column(name = "active")
-    private Boolean active;
 
     @ManyToMany(mappedBy = "robins")
     @JsonIgnoreProperties("robins")

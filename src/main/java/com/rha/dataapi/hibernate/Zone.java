@@ -5,7 +5,6 @@ import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,18 +13,7 @@ import java.util.Objects;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Data
-public class Zone extends AuditableEntity<Zone> implements Serializable {
-    @Column(name = "id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @NotBlank
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "active")
-    private Boolean active;
+public class Zone extends IdentityEntity<Integer, Zone> implements Serializable {
 
     @Override
     public void copyAttributes(Zone zoneToBeCopiedFrom) {

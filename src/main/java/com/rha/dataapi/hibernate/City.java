@@ -51,8 +51,11 @@ public class City extends IdentityEntity<Integer, City> implements Serializable 
             joinColumns = {@JoinColumn(name = "cityId")},
             inverseJoinColumns = {@JoinColumn(name = "robinId")}
     )
-    @JsonIgnoreProperties("cities")
+    @JsonIgnoreProperties({"cities", "pointsOfContact"})
     private List<Robin> robins;
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "city")
+    private List<CityRobinRelation> pointsOfContact;
 
     /**
      * Only allow city email, FB group link, WhatsApp group link, WhatsApp cadets group link, zone and statuses to be updated.

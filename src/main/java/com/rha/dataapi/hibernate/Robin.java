@@ -39,7 +39,7 @@ public class Robin extends IdentityEntity<Integer, Robin> implements Serializabl
     private String emergencyContactNumber;
 
     @ManyToMany(mappedBy = "robins")
-    @JsonIgnoreProperties("robins")
+    @JsonIgnoreProperties({"robins","pointsOfContact"})
     private List<City> cities;
 
     @Override

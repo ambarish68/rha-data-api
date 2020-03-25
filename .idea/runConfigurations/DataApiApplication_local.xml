@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DataApiApplication local" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="rha-data-api" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.rha.dataapi.DataApiApplication" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -45,15 +45,6 @@ public class City extends IdentityEntity<Integer, City> implements Serializable 
     @Temporal(TemporalType.TIMESTAMP)
     private Date launchedAt;
 
-//    @OneToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name = "cityRobin",
-//            joinColumns = {@JoinColumn(name = "cityId")},
-//            inverseJoinColumns = {@JoinColumn(name = "robinId")}
-//    )
-//    @JsonIgnoreProperties({"cities", "pointsOfContact"})
-//    private List<Robin> robins;
-
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "city")
     private List<CityRobinRelation> pointsOfContact;
 

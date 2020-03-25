@@ -38,9 +38,12 @@ public class Robin extends IdentityEntity<Integer, Robin> implements Serializabl
     @Column(name = "emergencyContactNumber")
     private String emergencyContactNumber;
 
-    @ManyToMany(mappedBy = "robins")
-    @JsonIgnoreProperties({"robins","pointsOfContact"})
-    private List<City> cities;
+//    @ManyToMany(mappedBy = "robins")
+//    @JsonIgnoreProperties({"robins","pointsOfContact"})
+//    private List<City> cities;
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "robin")
+    private List<CityRobinRelation> relatedToCities;
 
     @Override
     public void copyAttributes(Robin robinToBeCopiedFrom) {

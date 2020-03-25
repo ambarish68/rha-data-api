@@ -17,11 +17,12 @@ public class CityRobinRelation {
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "cityId", referencedColumnName = "id")
-    @JsonIgnoreProperties("pointsOfContact")
+    @JsonIgnoreProperties({"pointsOfContact"})
     private City city;
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "robinId", referencedColumnName = "id")
+    @JsonIgnoreProperties({"relatedToCities"})
     private Robin robin;
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)

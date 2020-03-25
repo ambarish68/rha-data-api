@@ -4,4 +4,36 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
              http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="alterZoneAndCityToAddAuditColumns" author="ambarish.r">
+        <addColumn tableName="zone">
+            <column name="createdAt" type="datetime" defaultValueDate="NOW()"></column>
+            <column name="modifiedAt" type="datetime" defaultValueDate="NOW()"></column>
+        </addColumn>
+        <addColumn tableName="city">
+            <column name="createdAt" type="datetime" defaultValueDate="NOW()"></column>
+            <column name="modifiedAt" type="datetime" defaultValueDate="NOW()"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="alterZoneAndCityToAddAuditedByColumns" author="ambarish.r">
+        <addColumn tableName="zone">
+            <column name="createdBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+            <column name="modifiedBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+        </addColumn>
+        <addColumn tableName="city">
+            <column name="createdBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+            <column name="modifiedBy" type="VARCHAR(45)" defaultValue="ambarish.r"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="alterZoneToAddActiveColumn" author="ambarish.r">
+        <addColumn tableName="zone">
+            <column name="active" type="bit" defaultValueBoolean="true"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="alterStatusToAddActiveColumn" author="ambarish.r">
+        <addColumn tableName="status">
+            <column name="createdBy" type="VARCHAR(45)" defaultValue="ambarish.v.rao@gmail.com"></column>
+            <column name="modifiedBy" type="VARCHAR(45)" defaultValue="ambarish.v.rao@gmail.com"></column>
+            <column name="modifiedAt" type="datetime" defaultValueDate="NOW()"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,15 @@ public class User extends IdentityEntity<Integer, User> implements Serializable 
     @NotBlank
     @Column(name = "password")
     private String password;
+
+    @ManyToMany
+    @JoinTable(
+            name = "userRole",
+            joinColumns = @JoinColumn(
+                    name = "userId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "roleId", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     @Override
     public void copyAttributes(User userToBeCopiedFrom) {

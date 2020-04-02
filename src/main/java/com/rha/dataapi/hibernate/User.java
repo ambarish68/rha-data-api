@@ -24,7 +24,7 @@ public class User extends IdentityEntity<Integer, User> implements Serializable 
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "userRole",
             joinColumns = @JoinColumn(

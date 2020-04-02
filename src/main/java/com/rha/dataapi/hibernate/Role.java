@@ -17,10 +17,7 @@ import java.util.Objects;
 @Data
 public class Role extends IdentityEntity<Integer, Role> implements Serializable {
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "rolePrivilege",
             joinColumns = @JoinColumn(

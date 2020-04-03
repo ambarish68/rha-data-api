@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,7 @@ public class ZoneController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('Zone Editor')")
     public ResponseEntity<Zone> createZone(@RequestBody Zone zoneToBeCreated) {
         try {
             log.info("creating zone with parameters: " + objectMapper.writeValueAsString(zoneToBeCreated));
@@ -40,6 +42,7 @@ public class ZoneController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('Zone Editor')")
     public ResponseEntity<Zone> updateZone(@PathVariable Integer id, @RequestBody Zone zoneToBeUpdated) {
         try {
             if (!id.equals(zoneToBeUpdated.getId())) {
@@ -54,6 +57,7 @@ public class ZoneController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('Zone Editor')")
     public ResponseEntity<String> deleteZone(@PathVariable Integer id) {
         try {
             log.info("deleting zone with id: " + id);

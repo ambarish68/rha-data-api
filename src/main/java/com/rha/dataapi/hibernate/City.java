@@ -45,8 +45,8 @@ public class City extends IdentityEntity<Integer, City> implements Serializable 
     @Temporal(TemporalType.TIMESTAMP)
     private Date launchedAt;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "city")
-    private List<CityRobinRelation> pointsOfContact;
+//    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "city")
+//    private List<CityRobinRelation> pointsOfContact;
 
     /**
      * Only allow city email, FB group link, WhatsApp group link, WhatsApp cadets group link, zone and statuses to be updated.

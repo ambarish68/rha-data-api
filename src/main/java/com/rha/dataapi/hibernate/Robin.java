@@ -38,8 +38,8 @@ public class Robin extends IdentityEntity<Integer, Robin> implements Serializabl
     @Column(name = "emergencyContactNumber")
     private String emergencyContactNumber;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "robin")
-    private List<CityRobinRelation> relatedToCities;
+//    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "robin")
+//    private List<CityRobinRelation> relatedToCities;
 
     @Override
     public void copyAttributes(Robin robinToBeCopiedFrom) {

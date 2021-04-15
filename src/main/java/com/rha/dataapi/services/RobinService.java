@@ -5,6 +5,7 @@ import com.rha.dataapi.hibernate.Robin;
 import com.rha.dataapi.repositories.RobinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.swing.text.html.Option;
@@ -18,11 +19,13 @@ public class RobinService implements ICrudService<Robin, Integer> {
     private RobinRepository robinRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Robin> getAll() {
         return robinRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Robin get(Integer robinId) {
         Optional<Robin> optionalRobin = robinRepository.findById(robinId);
         if (optionalRobin.isPresent()) {

@@ -8,6 +8,7 @@ import com.rha.dataapi.repositories.RelationRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityNotFoundException;
@@ -26,11 +27,13 @@ public class RelationService implements ICrudService<Relation, Integer> {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<Relation> getAll() {
         return relationRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Relation get(Integer entityId) {
         Optional<Relation> optionalRelation = relationRepository.findById(entityId);
         if (optionalRelation.isPresent()) {

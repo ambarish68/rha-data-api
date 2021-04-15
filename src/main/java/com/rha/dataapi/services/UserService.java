@@ -4,6 +4,7 @@ import com.rha.dataapi.hibernate.User;
 import com.rha.dataapi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,11 +15,13 @@ public class UserService implements ICrudService<User, Integer> {
     private UserRepository userRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User get(Integer entityId) {
         return null;
     }

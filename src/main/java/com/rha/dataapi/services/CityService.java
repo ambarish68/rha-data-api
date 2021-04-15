@@ -10,6 +10,7 @@ import com.rha.dataapi.repositories.StatusRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -26,14 +27,16 @@ public class CityService implements ICrudService<City, Integer> {
     @Autowired
     private StatusRepository statusRepository;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
+    @Transactional(readOnly = true)
     public List<City> getAll() {
         return cityRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public City get(Integer cityId) {
         Optional<City> optionalCity = cityRepository.findById(cityId);
         if (optionalCity.isPresent()) {

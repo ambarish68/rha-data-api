@@ -5,6 +5,7 @@ import com.rha.dataapi.repositories.ZoneRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -18,11 +19,13 @@ public class ZoneService implements ICrudService<Zone, Integer> {
     private ZoneRepository zoneRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Zone> getAll() {
         return zoneRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Zone get(Integer zoneId) {
         Optional<Zone> optionalZone = zoneRepository.findById(zoneId);
         if (optionalZone.isPresent()) {

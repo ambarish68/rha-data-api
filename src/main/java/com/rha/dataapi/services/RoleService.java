@@ -4,6 +4,7 @@ import com.rha.dataapi.hibernate.Role;
 import com.rha.dataapi.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,11 +15,13 @@ public class RoleService  implements ICrudService<Role, Integer> {
     private RoleRepository roleRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Role> getAll() {
         return roleRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Role get(Integer entityId) {
         return null;
     }

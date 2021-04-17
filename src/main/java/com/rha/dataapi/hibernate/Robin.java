@@ -17,7 +17,7 @@ import java.util.Objects;
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Getter
 @Setter
-public class Robin extends IdentityEntity<Integer, Robin> implements Serializable {
+public class Robin extends NamedEntity<Integer, Robin> implements Serializable {
 
 
     @Column(name = "emailId")

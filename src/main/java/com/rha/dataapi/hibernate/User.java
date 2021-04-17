@@ -2,6 +2,7 @@ package com.rha.dataapi.hibernate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -10,12 +11,13 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Data
-public class User extends IdentityEntity<Integer, User> implements Serializable {
+public class User extends NamedEntity<Integer, User> implements Serializable {
     @NotBlank
     @Column(name = "emailId")
     private String emailId;

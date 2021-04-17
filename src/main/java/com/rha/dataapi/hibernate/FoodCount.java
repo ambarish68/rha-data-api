@@ -8,28 +8,26 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "foodCount")
+@Table(name = "foodcount")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Getter
 @Setter
 public class FoodCount extends IdentityEntity<Integer, FoodCount> implements Serializable {
 
-    @NotBlank
-    @Column(name = "count")
+    @Column(name = "`count`")
     private int count;
 
-    @Column(nullable = false, name = "from")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date from;
+    @Column(nullable = false, name = "`from`")
+    private LocalDate from;
 
-    @Column(nullable = false, name = "to")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date to;
+    @Column(nullable = false, name = "`to`")
+    private LocalDate to;
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "cityId", referencedColumnName = "id")
@@ -48,6 +46,7 @@ public class FoodCount extends IdentityEntity<Integer, FoodCount> implements Ser
             if (Objects.nonNull(fromFoodCount.getTo()) && fromFoodCount.getTo() != this.from) {
                 this.setTo(fromFoodCount.getTo());
             }
+            this.setId(fromFoodCount.getId());
         }
     }
 }

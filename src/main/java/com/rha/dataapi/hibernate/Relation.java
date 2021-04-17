@@ -18,7 +18,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
 @Getter
 @Setter
-public class Relation extends IdentityEntity<Integer, Relation> implements Serializable {
+public class Relation extends NamedEntity<Integer, Relation> implements Serializable {
 
     @Column(name = "description")
     private String description;

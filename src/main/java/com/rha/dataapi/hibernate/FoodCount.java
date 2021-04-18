@@ -46,7 +46,7 @@ public class FoodCount extends IdentityEntity<Integer, FoodCount> implements Ser
             if (Objects.nonNull(fromFoodCount.getTo()) && fromFoodCount.getTo() != this.from) {
                 this.setTo(fromFoodCount.getTo());
             }
-            this.setId(fromFoodCount.getId());
+            //this.setId(fromFoodCount.getId());
         }
     }
 }

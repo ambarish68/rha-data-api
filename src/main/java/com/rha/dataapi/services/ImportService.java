@@ -85,14 +85,19 @@ public class ImportService {
                             //if yes, update.
                             FoodCount foodCountStoredInDB=foodCountToCheckInDB.get();
                             foodCountStoredInDB.copyAttributes(currentCityFoodCount);
-                            foodCountRepository.save(foodCountStoredInDB);
-                        }else{
-                            foodCountRepository.save(currentCityFoodCount);
+                            foodCountsToBeImported.add(foodCountStoredInDB);
+                        }else if(!foodCountToCheckInDB.isPresent()){
+                            //not present in DB, create
+                            foodCountsToBeImported.add(currentCityFoodCount);
+                        }
+                        else{
+                            //everything is the same, no need to update
                         }
                     }
                 }
             }
         }
+        foodCountRepository.saveAll(foodCountsToBeImported);
     }
 
     private FoodCount formFoodCountObject(City city, LocalDate currentTimeSlice, Integer currentCityTimesliceCount) {

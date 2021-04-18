@@ -165,3 +165,9 @@ build/
 /.idea/POJOGeneratorSettings.xml
 /.idea/uiDesigner.xml
 /.idea/vcs.xml
+/.idea/libraries/Maven__com_opencsv_opencsv_4_1.xml
+/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml
+/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml
+/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml
+/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_9.xml
+/.idea/libraries/Maven__org_apache_commons_commons_text_1_1.xml

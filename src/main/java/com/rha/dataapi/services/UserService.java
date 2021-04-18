@@ -1,7 +1,10 @@
 package com.rha.dataapi.services;
 
+import com.rha.dataapi.hibernate.Privilege;
 import com.rha.dataapi.hibernate.User;
 import com.rha.dataapi.repositories.UserRepository;
+import com.rha.dataapi.search.GenericSpecification;
+import com.rha.dataapi.search.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,12 @@ public class UserService implements ICrudService<User, Integer> {
     @Transactional(readOnly = true)
     public User get(Integer entityId) {
         return null;
+    }
+
+    @Override
+    public List<User> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
+        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+        return userRepository.findAll(genericSpecification);
     }
 
     @Override

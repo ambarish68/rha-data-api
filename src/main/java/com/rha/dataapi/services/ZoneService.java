@@ -1,7 +1,10 @@
 package com.rha.dataapi.services;
 
+import com.rha.dataapi.hibernate.Privilege;
 import com.rha.dataapi.hibernate.Zone;
 import com.rha.dataapi.repositories.ZoneRepository;
+import com.rha.dataapi.search.GenericSpecification;
+import com.rha.dataapi.search.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,12 @@ public class ZoneService implements ICrudService<Zone, Integer> {
             return existingZone;
         }
         throw new EntityNotFoundException("Zone with id: " + zoneId + " not found");
+    }
+
+    @Override
+    public List<Zone> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
+        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+        return zoneRepository.findAll(genericSpecification);
     }
 
     @Override

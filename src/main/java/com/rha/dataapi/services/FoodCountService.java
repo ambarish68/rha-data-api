@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.rha.dataapi.hibernate.FoodCount;
 import com.rha.dataapi.repositories.FoodCountRepository;
+import com.rha.dataapi.search.GenericSpecification;
+import com.rha.dataapi.search.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,12 @@ public class FoodCountService implements ICrudService<FoodCount, Integer> {
     @Transactional(readOnly = true)
     public FoodCount get(Integer entityId) {
         return foodCountRepository.findById(entityId).orElse(null);
+    }
+
+    @Override
+    public List<FoodCount> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
+        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+        return foodCountRepository.findAll(genericSpecification);
     }
 
     @Override

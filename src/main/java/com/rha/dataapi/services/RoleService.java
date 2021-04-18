@@ -1,7 +1,10 @@
 package com.rha.dataapi.services;
 
+import com.rha.dataapi.hibernate.Privilege;
 import com.rha.dataapi.hibernate.Role;
 import com.rha.dataapi.repositories.RoleRepository;
+import com.rha.dataapi.search.GenericSpecification;
+import com.rha.dataapi.search.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,12 @@ public class RoleService  implements ICrudService<Role, Integer> {
     @Transactional(readOnly = true)
     public Role get(Integer entityId) {
         return null;
+    }
+
+    @Override
+    public List<Role> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
+        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+        return roleRepository.findAll(genericSpecification);
     }
 
     @Override

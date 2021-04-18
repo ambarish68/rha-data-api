@@ -4,9 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.rha.dataapi.Constants;
 import com.rha.dataapi.hibernate.City;
+import com.rha.dataapi.hibernate.FoodCount;
 import com.rha.dataapi.hibernate.Status;
 import com.rha.dataapi.repositories.CityRepository;
 import com.rha.dataapi.repositories.StatusRepository;
+import com.rha.dataapi.search.GenericSpecification;
+import com.rha.dataapi.search.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +46,12 @@ public class CityService implements ICrudService<City, Integer> {
             return optionalCity.get();
         }
         throw new EntityNotFoundException();
+    }
+
+    @Override
+    public List<City> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
+        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+        return cityRepository.findAll(genericSpecification);
     }
 
     @Override

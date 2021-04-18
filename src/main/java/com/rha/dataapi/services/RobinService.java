@@ -3,12 +3,13 @@ package com.rha.dataapi.services;
 import com.google.common.base.Preconditions;
 import com.rha.dataapi.hibernate.Robin;
 import com.rha.dataapi.repositories.RobinRepository;
+import com.rha.dataapi.search.GenericSpecification;
+import com.rha.dataapi.search.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,12 @@ public class RobinService implements ICrudService<Robin, Integer> {
             return optionalRobin.get();
         }
         throw new EntityNotFoundException();
+    }
+
+    @Override
+    public List<Robin> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
+        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+        return robinRepository.findAll(genericSpecification);
     }
 
     @Override

@@ -3,8 +3,11 @@ package com.rha.dataapi.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
+import com.rha.dataapi.hibernate.Privilege;
 import com.rha.dataapi.hibernate.Relation;
 import com.rha.dataapi.repositories.RelationRepository;
+import com.rha.dataapi.search.GenericSpecification;
+import com.rha.dataapi.search.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +43,12 @@ public class RelationService implements ICrudService<Relation, Integer> {
             return optionalRelation.get();
         }
         throw new EntityNotFoundException();
+    }
+
+    @Override
+    public List<Relation> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
+        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+        return relationRepository.findAll(genericSpecification);
     }
 
     @Override

@@ -1,0 +1,3 @@
+GET /cities/1 HTTP/1.1
+Host: localhost:15000
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbWJhcmlzaC52LnJhb0BnbWFpbC5jb20iLCJleHAiOjE2MTkyNjk5OTgsImlhdCI6MTYxODY2NTE5OH0.yDhywoGQCkEHl3W6HmJI1frrG5jNs_b8RCZVrNWqwry-H9gHDHxC8XJsZfLBOtkmOYVJ1hSIMMoMVTBZC47iWA

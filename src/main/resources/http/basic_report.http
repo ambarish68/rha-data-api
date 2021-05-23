@@ -1,0 +1,16 @@
+POST /reports HTTP/1.1
+Host: localhost:15000
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbWJhcmlzaC52LnJhb0BnbWFpbC5jb20iLCJleHAiOjE2MjIzODQ0MDgsImlhdCI6MTYyMTc3OTYwOH0.wMIwpM3rhIPL_yB4o-ak9AxrtqrfNTSfWTDpJ9gdCcyWEmJDmFpvY0qLMzJj9SA9tKjKvDLr8Q9XG3vXYkxwGg
+Content-Type: application/json
+Content-Length: 208
+
+{
+  "searchCriteria": [{
+    "key":"city.name",
+    "value":"Bangalore",
+    "operation":"EQUAL"
+  }],
+  "displayColumns": [],
+  "aggregateOverColumns": [],
+  "collection": "foodcount"
+}

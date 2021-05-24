@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.rha.dataapi.hibernate.Robin;
 import com.rha.dataapi.repositories.RobinRepository;
 import com.rha.dataapi.search.GenericSpecification;
-import com.rha.dataapi.search.SearchCriteria;
+import com.rha.dataapi.filters.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

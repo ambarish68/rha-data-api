@@ -1,6 +1,9 @@
 package com.rha.dataapi.search;
 
 import com.google.common.base.Preconditions;
+import com.rha.dataapi.aggregations.AggregateOption;
+import com.rha.dataapi.filters.SearchCriteria;
+import com.rha.dataapi.filters.SearchOperation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.apache.commons.lang.StringUtils;
@@ -18,6 +21,8 @@ public class GenericSpecification<T> implements Specification<T> {
     private static final long serialVersionUID = 1900581010229669687L;
 
     private List<SearchCriteria> list;
+    private List<String> groupByColumns;
+    private List<AggregateOption> aggregations;
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {

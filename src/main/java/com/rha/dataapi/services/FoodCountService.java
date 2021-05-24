@@ -6,7 +6,7 @@ import com.google.common.base.Preconditions;
 import com.rha.dataapi.hibernate.FoodCount;
 import com.rha.dataapi.repositories.FoodCountRepository;
 import com.rha.dataapi.search.GenericSpecification;
-import com.rha.dataapi.search.SearchCriteria;
+import com.rha.dataapi.filters.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

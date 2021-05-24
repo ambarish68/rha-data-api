@@ -1,6 +1,6 @@
 package com.rha.dataapi.services;
 
-import com.rha.dataapi.search.SearchCriteria;
+import com.rha.dataapi.filters.SearchCriteria;
 
 import java.io.Serializable;
 import java.util.List;

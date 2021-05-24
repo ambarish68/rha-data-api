@@ -1,4 +1,4 @@
-package com.rha.dataapi.search;
+package com.rha.dataapi.aggregations;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchCriteria {
+public class AggregateOption {
     private String key;
-    private Object value;
-    private SearchOperation operation;
+    private AggregateOption operation;
 }

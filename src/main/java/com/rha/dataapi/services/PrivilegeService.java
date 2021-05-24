@@ -1,10 +1,9 @@
 package com.rha.dataapi.services;
 
-import com.rha.dataapi.hibernate.FoodCount;
 import com.rha.dataapi.hibernate.Privilege;
 import com.rha.dataapi.repositories.PrivilegeRepository;
 import com.rha.dataapi.search.GenericSpecification;
-import com.rha.dataapi.search.SearchCriteria;
+import com.rha.dataapi.filters.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

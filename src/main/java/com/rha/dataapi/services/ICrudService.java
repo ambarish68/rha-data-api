@@ -1,6 +1,6 @@
 package com.rha.dataapi.services;
 
-import com.rha.dataapi.filters.SearchCriteria;
+import com.rha.dataapi.models.SearchRequest;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +11,7 @@ public interface ICrudService<Entity extends Serializable, EntityIdType> {
 
     Entity get(EntityIdType entityId);
 
-    List<Entity> getWithPredicate(List<SearchCriteria> searchCriteriaList);
+    List<Entity> getWithPredicate(SearchRequest searchRequest);
 
     Entity create(Entity entityToBeCreated);
 

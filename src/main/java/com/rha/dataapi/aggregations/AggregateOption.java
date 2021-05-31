@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AggregateOption {
     private String key;
-    private AggregateOption operation;
+    private AggregationOperation operation;
 }

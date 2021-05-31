@@ -2,6 +2,7 @@ package com.rha.dataapi.services;
 
 import com.google.common.base.Preconditions;
 import com.rha.dataapi.hibernate.Robin;
+import com.rha.dataapi.models.SearchRequest;
 import com.rha.dataapi.repositories.RobinRepository;
 import com.rha.dataapi.search.GenericSpecification;
 import com.rha.dataapi.filters.SearchCriteria;
@@ -36,8 +37,13 @@ public class RobinService implements ICrudService<Robin, Integer> {
     }
 
     @Override
-    public List<Robin> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
-        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+    public List<Robin> getWithPredicate(SearchRequest searchRequest) {
+        GenericSpecification genericSpecification = GenericSpecification.builder()
+                .listOfCriteria(searchRequest.getSearchCriteria())
+                .aggregations(searchRequest.getAggregateOptions())
+                .groupByColumns(searchRequest.getGroupByColumns())
+                .displayColumns(searchRequest.getDisplayColumns())
+                .build();
         return robinRepository.findAll(genericSpecification);
     }
 

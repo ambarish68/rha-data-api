@@ -1,6 +1,7 @@
 package com.rha.dataapi.services;
 
 import com.rha.dataapi.hibernate.Zone;
+import com.rha.dataapi.models.SearchRequest;
 import com.rha.dataapi.repositories.ZoneRepository;
 import com.rha.dataapi.search.GenericSpecification;
 import com.rha.dataapi.filters.SearchCriteria;
@@ -38,8 +39,13 @@ public class ZoneService implements ICrudService<Zone, Integer> {
     }
 
     @Override
-    public List<Zone> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
-        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+    public List<Zone> getWithPredicate(SearchRequest searchRequest) {
+        GenericSpecification genericSpecification = GenericSpecification.builder()
+                .listOfCriteria(searchRequest.getSearchCriteria())
+                .aggregations(searchRequest.getAggregateOptions())
+                .groupByColumns(searchRequest.getGroupByColumns())
+                .displayColumns(searchRequest.getDisplayColumns())
+                .build();
         return zoneRepository.findAll(genericSpecification);
     }
 

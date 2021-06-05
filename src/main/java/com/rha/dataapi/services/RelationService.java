@@ -1,19 +1,17 @@
 package com.rha.dataapi.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
-import com.rha.dataapi.hibernate.Privilege;
 import com.rha.dataapi.hibernate.Relation;
+import com.rha.dataapi.models.SearchRequest;
 import com.rha.dataapi.repositories.RelationRepository;
 import com.rha.dataapi.search.GenericSpecification;
-import com.rha.dataapi.search.SearchCriteria;
+import com.rha.dataapi.filters.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Objects;
@@ -46,8 +44,13 @@ public class RelationService implements ICrudService<Relation, Integer> {
     }
 
     @Override
-    public List<Relation> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
-        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+    public List<Relation> getWithPredicate(SearchRequest searchRequest) {
+        GenericSpecification genericSpecification = GenericSpecification.builder()
+                .listOfCriteria(searchRequest.getSearchCriteria())
+                .aggregations(searchRequest.getAggregateOptions())
+                .groupByColumns(searchRequest.getGroupByColumns())
+                .displayColumns(searchRequest.getDisplayColumns())
+                .build();
         return relationRepository.findAll(genericSpecification);
     }
 

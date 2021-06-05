@@ -1,6 +1,7 @@
 package com.rha.dataapi.models;
 
-import com.rha.dataapi.search.SearchCriteria;
+import com.rha.dataapi.aggregations.AggregateOption;
+import com.rha.dataapi.filters.SearchCriteria;
 import lombok.Data;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class SearchRequest {
     private List<SearchCriteria> searchCriteria;
     private List<String> displayColumns;
-    private List<String> aggregateOverColumns;
+    private List<String> groupByColumns;
+    private List<AggregateOption> aggregateOptions;
     private String collection;
 }

@@ -4,7 +4,6 @@ import com.rha.dataapi.auth.services.JwtUserDetailsService;
 import com.rha.dataapi.config.JwtTokenUtil;
 import com.rha.dataapi.services.CorrelationIdService;
 import io.jsonwebtoken.ExpiredJwtException;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,12 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class JwtRequestFilter extends OncePerRequestFilter {
+    @Autowired
+    private JwtUserDetailsService jwtUserDetailsService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
-    private final JwtUserDetailsService jwtUserDetailsService;
-    private final JwtTokenUtil jwtTokenUtil;
-    private final CorrelationIdService correlationIdService;
+    @Autowired
+    private CorrelationIdService correlationIdService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

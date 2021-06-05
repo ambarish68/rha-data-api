@@ -1,4 +1,4 @@
-package com.rha.dataapi.search;
+package com.rha.dataapi.filters;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

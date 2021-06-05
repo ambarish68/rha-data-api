@@ -4,12 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.rha.dataapi.Constants;
 import com.rha.dataapi.hibernate.City;
-import com.rha.dataapi.hibernate.FoodCount;
 import com.rha.dataapi.hibernate.Status;
+import com.rha.dataapi.models.SearchRequest;
 import com.rha.dataapi.repositories.CityRepository;
 import com.rha.dataapi.repositories.StatusRepository;
 import com.rha.dataapi.search.GenericSpecification;
-import com.rha.dataapi.search.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,8 +48,13 @@ public class CityService implements ICrudService<City, Integer> {
     }
 
     @Override
-    public List<City> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
-        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+    public List<City> getWithPredicate(SearchRequest searchRequest) {
+        GenericSpecification genericSpecification = GenericSpecification.builder()
+                .listOfCriteria(searchRequest.getSearchCriteria())
+                .aggregations(searchRequest.getAggregateOptions())
+                .groupByColumns(searchRequest.getGroupByColumns())
+                .displayColumns(searchRequest.getDisplayColumns())
+                .build();
         return cityRepository.findAll(genericSpecification);
     }
 

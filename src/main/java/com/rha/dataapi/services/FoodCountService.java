@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.rha.dataapi.hibernate.FoodCount;
+import com.rha.dataapi.models.SearchRequest;
 import com.rha.dataapi.repositories.FoodCountRepository;
 import com.rha.dataapi.search.GenericSpecification;
-import com.rha.dataapi.search.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +38,13 @@ public class FoodCountService implements ICrudService<FoodCount, Integer> {
     }
 
     @Override
-    public List<FoodCount> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
-        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+    public List<FoodCount> getWithPredicate(SearchRequest searchRequest) {
+        GenericSpecification genericSpecification = GenericSpecification.builder()
+                .listOfCriteria(searchRequest.getSearchCriteria())
+                .aggregations(searchRequest.getAggregateOptions())
+                .groupByColumns(searchRequest.getGroupByColumns())
+                .displayColumns(searchRequest.getDisplayColumns())
+                .build();
         return foodCountRepository.findAll(genericSpecification);
     }
 
@@ -63,8 +68,8 @@ public class FoodCountService implements ICrudService<FoodCount, Integer> {
         Preconditions.checkNotNull(entityId, "food count id cannot be null");
         Preconditions.checkNotNull(entityToBeUpdated, "Update parameters cannot be null");
         Optional<FoodCount> optionalFoodCount = foodCountRepository.findById(entityId);
-        if(optionalFoodCount.isPresent()){
-            FoodCount existingFoodCount=optionalFoodCount.get();
+        if (optionalFoodCount.isPresent()) {
+            FoodCount existingFoodCount = optionalFoodCount.get();
             existingFoodCount.copyAttributes(entityToBeUpdated);
             return foodCountRepository.save(existingFoodCount);
         }

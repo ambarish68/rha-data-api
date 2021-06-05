@@ -1,10 +1,10 @@
 package com.rha.dataapi.services;
 
-import com.rha.dataapi.hibernate.Privilege;
 import com.rha.dataapi.hibernate.Zone;
+import com.rha.dataapi.models.SearchRequest;
 import com.rha.dataapi.repositories.ZoneRepository;
 import com.rha.dataapi.search.GenericSpecification;
-import com.rha.dataapi.search.SearchCriteria;
+import com.rha.dataapi.filters.SearchCriteria;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +39,13 @@ public class ZoneService implements ICrudService<Zone, Integer> {
     }
 
     @Override
-    public List<Zone> getWithPredicate(List<SearchCriteria> searchCriteriaList) {
-        GenericSpecification genericSpecification = GenericSpecification.builder().list(searchCriteriaList).build();
+    public List<Zone> getWithPredicate(SearchRequest searchRequest) {
+        GenericSpecification genericSpecification = GenericSpecification.builder()
+                .listOfCriteria(searchRequest.getSearchCriteria())
+                .aggregations(searchRequest.getAggregateOptions())
+                .groupByColumns(searchRequest.getGroupByColumns())
+                .displayColumns(searchRequest.getDisplayColumns())
+                .build();
         return zoneRepository.findAll(genericSpecification);
     }
 
